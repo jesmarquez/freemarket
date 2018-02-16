@@ -21,12 +21,23 @@ class UsersController extends Controller
             // You can set any number of default request options.
             'timeout'  => 2.0,
         ]);
-        $response = $client->get('https://api.mercadolibre.com/users/me?access_token=APP_USR-8206459701620385-021223-1d060795f5f76f21c6fdda5700134d5a__D_G__-65350076');
+
+        // ID: 8206459701620385 | Secret key: Zz3ReGLrszJIrdu1a27oKEqf5Jf8R0i4
+                       
+        
+        $response = $client->get('https://api.mercadolibre.com/users/me?access_token=APP_USR-8206459701620385-021421-fc4cba04053d39e338215e585b0c0b8b__A_K__-65350076');
         $code = $response->getStatusCode();
         //printf("code:%d\n", $code);
         $body = $response->getBody();
         
         $user_array = json_decode($body,TRUE);
-        return ($user_array);
+        $username = $user_array['nickname'];
+		$firstname = $user_array['first_name'];
+		$lastname = $user_array['last_name'];
+        $email = $user_array['email'];
+        $country = $user_array['country_id'];
+        $permalink = $user_array['permalink'];
+
+        return view('user', ['username'=>$username, 'firstname'=>$firstname, 'lastname' => $lastname, 'email'=>$email, 'country' => $country, 'permalink'=>$permalink]);
     }
 }
