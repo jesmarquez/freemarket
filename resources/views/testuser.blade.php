@@ -43,7 +43,6 @@
                 <p class="card-text">nickname: {{ $nickname }}</p>
                 <p class="card-text">password: {{ $password }}</p>
                 <p class="card-text">site_status: {{ $site_status }}</p>
-
                 <a href="#" class="btn btn-primary">Ok</a>
               </div>
             </div>

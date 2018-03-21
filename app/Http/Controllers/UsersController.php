@@ -43,17 +43,25 @@ class UsersController extends Controller
 
     /* *
      * Solicita crear usuario de pruebas en mercado libre
-     * y muestra los datos
+     * y muestra los datos del usuario
      * @param none
      * @return view
      * */
     function createTestUser()
     {
-      $id=100;
-      $nickname='test100';
-      $password='huu23';
-      $site_status='active';
+      $app_id_ml = env('APP_ID_ML', false);
 
-      return view('testuser', ['id'=>$id, 'nickname'=>$nickname, 'password' => $password, 'site_status'=>$site_status]);
+      $client = new Client([
+        'base_uri' => 'https://api.mercadolibre.com',
+        'timeout'  => 2.0,
+      ]);
+
+      $response = $client->request('POST', 'https://api.mercadolibre.com/users/test_user?access_token=APP_USR-8206459701620385-032111-bf852d23433afb7c0fff31cfd92927fb-65350076', ['json' => ['site_id' => 'MLA']]);
+      
+      $code = $response->getStatusCode();
+      $body = $response->getBody();
+      $test_user = json_decode($body,TRUE);
+
+      return view('testuser', ['id' => $test_user['id'], 'nickname' => $test_user['nickname'], 'password' => $test_user['password'], 'site_status'=> $test_user['site_status']]);
     }
 }
