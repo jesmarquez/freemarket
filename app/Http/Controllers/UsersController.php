@@ -41,6 +41,12 @@ class UsersController extends Controller
         return view('user', ['username'=>$username, 'firstname'=>$firstname, 'lastname' => $lastname, 'email'=>$email, 'country' => $country, 'permalink'=>$permalink]);
     }
 
+    /* *
+     * Solicita crear usuario de pruebas en mercado libre
+     * y muestra los datos
+     * @param none
+     * @return view
+     * */
     function createTestUser()
     {
       $id=100;
